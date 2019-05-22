@@ -50,3 +50,6 @@ $config = [
     'email_subject' => 'Assunto do e-mail'
 ];
 ```
+## Testando a aplicação
+
+Para testar a aplicação em localhost acesse o diretório `public`. Exemplo: `localhost/contato/public`
