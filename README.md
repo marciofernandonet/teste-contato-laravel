@@ -1,139 +1,52 @@
-# CodeIgniter Composer Installer
+# Projeto Teste Contato
 
-[![Latest Stable Version](https://poser.pugx.org/kenjis/codeigniter-composer-installer/v/stable)](https://packagist.org/packages/kenjis/codeigniter-composer-installer) [![Total Downloads](https://poser.pugx.org/kenjis/codeigniter-composer-installer/downloads)](https://packagist.org/packages/kenjis/codeigniter-composer-installer) [![Latest Unstable Version](https://poser.pugx.org/kenjis/codeigniter-composer-installer/v/unstable)](https://packagist.org/packages/kenjis/codeigniter-composer-installer) [![License](https://poser.pugx.org/kenjis/codeigniter-composer-installer/license)](https://packagist.org/packages/kenjis/codeigniter-composer-installer)
+## Instalação
 
-This package installs the offical [CodeIgniter](https://github.com/bcit-ci/CodeIgniter) (version `3.1.*`) with secure folder structure via Composer.
+1. Faça o clone deste projeto com `git clone https://github.com/marciofernandonet/contato.git`
+2. Entre na pasta do projeto e instale as dependências com `composer install`
 
-**Note:** If you want to install CodeIgniter4 (under development), see <https://github.com/kenjis/codeigniter-composer-installer/tree/4.x>.
+## Criando o banco de dados
 
-You can update CodeIgniter system folder to latest version with one command.
+O banco de dados para a aplicação é o MySql, para criar o banco é necessário executar o seguinte código abaixo.
 
-## Folder Structure
+```sql
 
-```
-codeigniter/
-├── application/
-├── composer.json
-├── composer.lock
-├── public/
-│   ├── .htaccess
-│   └── index.php
-└── vendor/
-    └── codeigniter/
-        └── framework/
-            └── system/
-```
-
-## Requirements
-
-* PHP 5.3.7 or later
-* `composer` command (See [Composer Installation](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx))
-* Git
-
-## How to Use
-
-### Install CodeIgniter
+    CREATE DATABASE db_contato;
+  
+    CREATE TABLE `contatos` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `nome` varchar(80) NOT NULL,
+      `email` varchar(60) NOT NULL,
+      `telefone` varchar(14) NOT NULL,
+      `mensagem` text NOT NULL,
+      `arquivo_cam` varchar(200) NOT NULL,
+      `ip` varchar(15) NOT NULL, 
+      `data` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ```
-$ composer create-project kenjis/codeigniter-composer-installer codeigniter
-```
 
-Above command installs `public/.htaccess` to remove `index.php` in your URL. If you don't need it, please remove it.
+## Configurando o arquivo de conexão com o banco de dados
 
-And it changes `application/config/config.php`:
+O arquivo de configuração de conexão com o banco de dados está localizado em `application\config\database.php`, basta alterar os valores dos campos: `hostname, username, password e database` de acordo com as definições do seu banco de dados MySql.
 
-~~~
-$config['composer_autoload'] = FALSE;
-↓
-$config['composer_autoload'] = realpath(APPPATH . '../vendor/autoload.php');
-~~~
+## Configurando o arquivo para envio de e-mail
 
-~~~
-$config['index_page'] = 'index.php';
-↓
-$config['index_page'] = '';
-~~~
-
-#### Install Translations for System Messages
-
-If you want to install translations for system messages:
+O arquivo de configuração para envio de e-mail está localizado em `application\config\email.php`, basta alterar os valores dos campos de acordo com cada opção de seu provedor de email. No exemplo de teste utilizei o serviço do Outlook para realizar o envio.
 
 ```
-$ cd /path/to/codeigniter
-$ php bin/install.php translations 3.1.0
+$config = [        
+    'protocol' => 'smtp',
+    'smtp_host' => 'smtp-mail.outlook.com',
+    'smtp_user' => 'E-mail do outlook',
+    'smtp_pass' => 'Senha',
+    'smtp_crypto' => 'tls',    
+    'newline' => "\r\n",
+    'smtp_port' => 587,
+    'mailtype' => 'html',
+    'charset' => 'utf-8',
+    'email_to' => 'E-mail de destino', 
+    'email_subject' => 'Assunto do e-mail'
+];
 ```
-
-#### Install Third Party Libraries
-
-[Codeigniter Matches CLI](https://github.com/avenirer/codeigniter-matches-cli):
-
-```
-$ php bin/install.php matches-cli master
-```
-
-[CodeIgniter HMVC Modules](https://github.com/jenssegers/codeigniter-hmvc-modules):
-
-```
-$ php bin/install.php hmvc-modules master
-```
-
-[Modular Extensions - HMVC](https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc):
-
-```
-$ php bin/install.php modular-extensions-hmvc codeigniter-3.x
-```
-
-[Ion Auth](https://github.com/benedmunds/CodeIgniter-Ion-Auth):
-
-```
-$ php bin/install.php ion-auth 2
-```
-
-[CodeIgniter3 Filename Checker](https://github.com/kenjis/codeigniter3-filename-checker):
-
-```
-$ php bin/install.php filename-checker master
-```
-
-[CodeIgniter Rest Server](https://github.com/chriskacerguis/codeigniter-restserver):
-
-```
-$ php bin/install.php restserver 2.7.2
-```
-[CodeIgniter Developer Toolbar](https://github.com/JCSama/CodeIgniter-develbar):
-
-```
-$ php bin/install.php codeigniter-develbar master
-```
-
-### Run PHP built-in server (PHP 5.4 or later)
-
-```
-$ cd /path/to/codeigniter
-$ bin/server.sh
-```
-
-### Update CodeIgniter
-
-```
-$ cd /path/to/codeigniter
-$ composer update
-```
-
-You must update files manually if files in `application` folder or `index.php` change. Check [CodeIgniter User Guide](http://www.codeigniter.com/user_guide/installation/upgrading.html).
-
-## Reference
-
-* [Composer Installation](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
-* [CodeIgniter](https://github.com/bcit-ci/CodeIgniter)
-* [Translations for CodeIgniter System](https://github.com/bcit-ci/codeigniter3-translations)
-
-## Related Projects for CodeIgniter 3.x
-
-* [Cli for CodeIgniter 3.0](https://github.com/kenjis/codeigniter-cli)
-* [ci-phpunit-test](https://github.com/kenjis/ci-phpunit-test)
-* [CodeIgniter Simple and Secure Twig](https://github.com/kenjis/codeigniter-ss-twig)
-* [CodeIgniter Doctrine](https://github.com/kenjis/codeigniter-doctrine)
-* [CodeIgniter Deployer](https://github.com/kenjis/codeigniter-deployer)
-* [CodeIgniter3 Filename Checker](https://github.com/kenjis/codeigniter3-filename-checker)
-* [CodeIgniter Widget (View Partial) Sample](https://github.com/kenjis/codeigniter-widgets)
