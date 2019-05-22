@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $config = [        
     'protocol' => 'smtp',
     'smtp_host' => 'smtp.office365.com',
-    'smtp_user' => 'marciofernandonet@hotmail.com',
+    'smtp_user' => '',
     'smtp_pass' => '',
     'smtp_crypto' => 'tls',    
     'newline' => "\r\n",
