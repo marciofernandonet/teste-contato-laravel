@@ -1,0 +1,13 @@
+{
+	"description" : "Adicionar Contatos",
+	"require": {
+		"php": ">=5.3.2",
+		"codeigniter/framework": "3.1.*",
+		"twbs/bootstrap": "4.3.1",
+		"components/jquery": "^3.3",
+		"igorescobar/jquery-mask-plugin": "^1.14"
+	},
+	"require-dev": {
+		"mikey179/vfsStream": "1.1.*"
+	}
+}
