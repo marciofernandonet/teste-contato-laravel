@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Teste</title>
-  <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css"/>-->
+  <title>Teste Contato Laravel</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
@@ -24,13 +23,11 @@
                     Enviar contato
                 </div>
                 <div class="card-body">
-                    
                     @if(session()->get('type'))
                     <div class="alert alert-{{session()->get('type')}}">
                         {{ session()->get('msg') }}  
                     </div>
                     @endif
-
                     <form method="POST" action="{{url('/')}}" enctype="multipart/form-data">
                         <div class="form-group">
                             @csrf
@@ -88,15 +85,11 @@
         </div>
     </div>
 </div>
-
 <script>
-    $(".custom-file-input").on("change", function(){
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    });
+$(".custom-file-input").on("change", function(){
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
 </script>
-
-<!--<script src="{{ asset('js/app.js') }}" type="text/js"></script>-->
-
 </body>
 </html>
