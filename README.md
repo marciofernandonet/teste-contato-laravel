@@ -22,7 +22,7 @@ Os dados informados devem ser validados utilizando as seguintes regras:
 
 ## Instalação e execução 
 1. Faça o clone do projeto;
-2. Use o _Composer_ para baixar as dependências `composer update`;
+2. Use o _Composer_ para baixar as dependências `composer install`;
 3. Crie uma cópia do arquivo _.env.example_ com o nome _.env_, ou execute o comando `cp .env.example .env`;
 4. Execute o comando `php artisan key:generate` para gerar uma chave de encriptação;
 5. Configure o acesso ao banco de dados no arquivo _.env_ com as credenciais:
